@@ -1,0 +1,19 @@
+PVC-Hub — COMPLETE SOURCE PACKAGE
+
+This package combines the original Ver6 project source with the security hardening and Premium Minimal UI changes.
+
+Included:
+- Original Android project structure and application source/resources.
+- Premium Minimal inbox UI changes (green identity #00A479; simplified navigation/layout).
+- Security hardening changes and docs/SECURITY-REMEDIATION.md.
+- Updated GitHub Actions workflow and Gradle configuration for safer signing.
+
+Intentionally not included:
+- app/pvc-hub.keystore: the original repository contained a private signing keystore. It is excluded so that a private signing key is not redistributed. Configure a new release keystore using the environment variables documented in app/build.gradle.kts / README.md.
+- PVC-Hub-0.11-full.zip: an embedded older source snapshot; it is not required to build the current project and may contain stale configuration or credentials.
+
+Build notes:
+- Open this folder (the one containing settings.gradle.kts) in Android Studio.
+- Sync Gradle, then build the app.
+- The source package has not been compiled in this environment; run a clean build and test on a device/emulator before release.
+- Do not commit keystores, passwords, signing credentials, or local.properties.
