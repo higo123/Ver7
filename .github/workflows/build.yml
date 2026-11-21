@@ -3,7 +3,9 @@ name: Build and verify PVC-Hub
 
 on:
   push:
-    branches: [main, master]
+    branches:
+      - main
+      - master
   pull_request:
   workflow_dispatch:
 
@@ -13,6 +15,7 @@ permissions:
 jobs:
   verify:
     runs-on: ubuntu-latest
+
     steps:
       - name: Check out source
         uses: actions/checkout@v4
@@ -53,15 +56,19 @@ jobs:
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     needs: verify
+
     env:
       PVC_RELEASE_KEYSTORE_BASE64: ${{ secrets.PVC_RELEASE_KEYSTORE_BASE64 }}
       PVC_RELEASE_STORE_PASSWORD: ${{ secrets.PVC_RELEASE_STORE_PASSWORD }}
       PVC_RELEASE_KEY_ALIAS: ${{ secrets.PVC_RELEASE_KEY_ALIAS }}
       PVC_RELEASE_KEY_PASSWORD: ${{ secrets.PVC_RELEASE_KEY_PASSWORD }}
+
     steps:
       - name: Skip release when signing secrets are not configured
         if: ${{ env.PVC_RELEASE_KEYSTORE_BASE64 == '' }}
-        run: echo "Release skipped: configure the four PVC_RELEASE_* repository secrets."
+        shell: bash
+        run: |
+          echo "Release skipped: configure the four PVC_RELEASE_* repository secrets."
 
       - name: Check out source
         if: ${{ env.PVC_RELEASE_KEYSTORE_BASE64 != '' }}
@@ -97,9 +104,15 @@ jobs:
           test -n "$PVC_RELEASE_STORE_PASSWORD"
           test -n "$PVC_RELEASE_KEY_ALIAS"
           test -n "$PVC_RELEASE_KEY_PASSWORD"
+
           mkdir -p "$RUNNER_TEMP/pvc-signing"
-          printf '%s' "$PVC_RELEASE_KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/pvc-signing/release.jks"
+
+          printf '%s' "$PVC_RELEASE_KEYSTORE_BASE64" \
+            | base64 --decode \
+            > "$RUNNER_TEMP/pvc-signing/release.jks"
+
           test -s "$RUNNER_TEMP/pvc-signing/release.jks"
+
           echo "PVC_RELEASE_STORE_FILE=$RUNNER_TEMP/pvc-signing/release.jks" >> "$GITHUB_ENV"
 
       - name: Build signed release APK
@@ -111,10 +124,13 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+
           APK="app/build/outputs/apk/release/app-release.apk"
-          test -f "$APK"
           APKSIGNER="$ANDROID_HOME/build-tools/35.0.0/apksigner"
+
+          test -f "$APK"
           test -x "$APKSIGNER"
+
           "$APKSIGNER" verify --verbose "$APK"
 
       - name: Name release APK
@@ -122,7 +138,9 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+
           VERSION=$(grep -oP 'versionName = "\K[^" ]+' app/build.gradle.kts)
+
           cp app/build/outputs/apk/release/app-release.apk "PVC-Hub-$VERSION.apk"
 
       - name: Upload signed release APK
