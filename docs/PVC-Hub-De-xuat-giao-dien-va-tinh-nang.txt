@@ -1,0 +1,110 @@
+PVC-HUB VER6 — ĐỀ XUẤT HOÀN THIỆN GIAO DIỆN VÀ TÍNH NĂNG
+Ngày tổng hợp: 20/11/2026
+
+ĐỊNH HƯỚNG ĐƯỢC CHỌN
+- Phong cách: Premium Minimal — hiện đại, gọn, tinh tế, ưu tiên khả năng đọc và thao tác nhanh.
+- Màu thương hiệu: xanh #00A479 làm màu nhấn; nền trung tính, bề mặt sáng; hỗ trợ giao diện sáng/tối theo hệ thống.
+- Mật độ: Comfortable — khoảng cách vừa phải, dễ đọc, không quá dày cũng không lãng phí diện tích.
+- Điều hướng: 4 khu vực chính: Hộp thư, Ưu tiên, Đã hoãn, Thiết lập. Các bộ lọc theo nguồn (Email, Điện thoại, Chat, Mạng xã hội) tiếp tục nằm trong menu bên để không làm thanh điều hướng quá tải.
+
+1. MÀN HÌNH HỘP THƯ
+Mục tiêu: người dùng nhìn nhanh được tình trạng liên lạc và mở đúng nội dung trong ít thao tác.
+- Thanh đầu trang tối giản: tên màn hình rõ ràng; tìm kiếm, làm mới và đánh dấu đã đọc đặt ở vùng thao tác quen thuộc.
+- Dùng nền trung tính thay vì tô toàn bộ thanh tiêu đề bằng xanh đậm; xanh thương hiệu chỉ nhấn vào nút chính, trạng thái đang chọn và các điểm quan trọng.
+- Khu vực tổng quan hiển thị số chưa đọc, ưu tiên và đã hoãn; từng ô có thể chạm để chuyển nhanh sang bộ lọc tương ứng.
+- Danh sách tin nhắn phân cấp rõ: người gửi, tiêu đề/nội dung, bản xem trước, thời gian, nguồn và trạng thái đọc.
+- Giữ thao tác vuốt hiện có: vuốt phải đánh dấu đã đọc; vuốt trái ẩn khỏi Hub. Cần thông báo rõ và có hướng hoàn tác trong phiên bản tiếp theo.
+- Nút soạn email nổi chỉ xuất hiện khi tài khoản Gmail đã được thiết lập.
+- Giữ chỉ báo đồng bộ, cảnh báo thiết lập chưa hoàn tất và thông báo cập nhật nhưng trình bày gọn, không lấn át danh sách.
+
+2. ĐIỀU HƯỚNG VÀ PHÂN NHÓM
+- Hộp thư: tất cả nội dung, bao gồm lọc theo từng nguồn/tài khoản trong menu bên.
+- Ưu tiên: nội dung từ người gửi VIP hoặc được đánh dấu ưu tiên.
+- Đã hoãn: nội dung được tạm hoãn, có thao tác bỏ hoãn và quản lý hàng loạt.
+- Thiết lập: nơi quản lý tài khoản, quyền, đồng bộ, thông báo, bảo mật, sao lưu và hỗ trợ.
+- Menu bên tiếp tục chứa Email, Điện thoại, Chat, Mạng xã hội và từng tài khoản email. Không loại bỏ các lối lọc đang có.
+- Chưa đưa mục Danh bạ hoặc Trung tâm công việc thành tab thật khi ứng dụng chưa có dữ liệu/tính năng nền tảng tương ứng; tránh tạo điều hướng giả hoặc màn hình trống.
+
+3. TỔ CHỨC LẠI THIẾT LẬP
+Nhóm A — Tài khoản và nguồn dữ liệu:
+- Tài khoản email, cấu hình IMAP/SMTP.
+- Ứng dụng chat và nguồn thông báo.
+- Quyền truy cập SMS, cuộc gọi và thông báo.
+
+Nhóm B — Đồng bộ và thông báo:
+- Đồng bộ thủ công/tự động, chẩn đoán đồng bộ.
+- Peek, nhật ký thông báo, giờ yên tĩnh.
+- Trạng thái kết nối và lỗi gần nhất.
+
+Nhóm C — Cá nhân hóa hộp thư:
+- Quy tắc lọc, người gửi VIP, chữ ký email.
+- Tự động dọn dẹp, tùy chọn vuốt.
+- Chủ đề sáng/tối/theo hệ thống và cỡ chữ (đề xuất bổ sung).
+
+Nhóm D — Bảo mật và riêng tư:
+- Khóa ứng dụng.
+- Kiểm soát nguồn thông báo được thu thập.
+- Minh bạch dữ liệu lưu trên thiết bị và cách xóa dữ liệu.
+
+Nhóm E — Sao lưu và khôi phục:
+- Sao lưu, nhập bản sao lưu, kiểm tra tính hợp lệ và giới hạn dung lượng.
+
+Nhóm F — Trạng thái và hỗ trợ:
+- Kiểm tra cập nhật, nhật ký thông báo, chẩn đoán và hướng dẫn xử lý lỗi.
+
+4. CÁC TÍNH NĂNG NÊN BỔ SUNG
+Ưu tiên cao:
+- Chọn nhiều: chọn nhiều email/tin nhắn để đánh dấu đã đọc, ẩn hoặc lưu trữ.
+- Hoàn tác: snackbar cho thao tác ẩn, lưu trữ hoặc đánh dấu hàng loạt.
+- Tìm kiếm nâng cao: lọc theo nguồn, người gửi, trạng thái chưa đọc và khoảng thời gian.
+- Tùy chỉnh thao tác vuốt: cho phép người dùng chọn hành động trái/phải.
+- Trạng thái rỗng, đang tải, mất kết nối và lỗi đồng bộ được thiết kế thống nhất.
+
+Ưu tiên trung bình:
+- Nhắc trả lời: gắn cờ các hội thoại cần phản hồi sau một khoảng thời gian.
+- Tóm tắt hoạt động trong ngày: số nội dung mới, ưu tiên và việc cần xử lý.
+- Hồ sơ người gửi: gom lịch sử email/tin nhắn/cuộc gọi theo một liên hệ (cần thiết kế dữ liệu và quyền riêng tư trước).
+- Quản lý danh bạ và lịch sau khi có mô hình dữ liệu phù hợp.
+
+Định hướng AI — chỉ triển khai sau khi có cơ chế bảo vệ dữ liệu rõ ràng:
+- Phân loại nội dung và phát hiện thư đáng ngờ.
+- Tóm tắt chuỗi hội thoại dài.
+- Gợi ý câu trả lời, người dùng luôn duyệt trước khi gửi.
+- Bản tin đầu ngày, nhấn mạnh việc cần xử lý.
+- Không tự động gửi nội dung hoặc đưa dữ liệu nhạy cảm lên dịch vụ ngoài khi chưa có sự đồng ý rõ ràng.
+
+5. NGUYÊN TẮC THIẾT KẾ
+- Màu xanh #00A479 là màu nhận diện, không phủ kín toàn bộ giao diện.
+- Dùng nền và bề mặt trung tính, đường phân cách nhẹ, bo góc nhất quán.
+- Phân cấp chữ: người gửi/tiêu đề nổi bật; bản xem trước và metadata nhẹ hơn.
+- Vùng chạm đủ lớn; các hành động nguy hiểm cần xác nhận hoặc có thể hoàn tác.
+- Tương phản tốt ở cả chế độ sáng và tối.
+- Icon cùng phong cách, không trộn nhiều kiểu nét.
+- Hạn chế hiệu ứng chuyển động và gradient; ưu tiên tốc độ, dễ đọc, tiết kiệm pin.
+
+6. LỘ TRÌNH ĐỀ XUẤT
+Bản 0.12 — Nền tảng giao diện:
+- Làm mới màn hình chính, điều hướng 4 mục và cấu trúc thiết lập.
+- Chuẩn hóa màu sắc, khoảng cách, kiểu chữ, trạng thái rỗng/đang tải/lỗi.
+
+Bản 0.13 — Năng suất:
+- Chọn nhiều, hoàn tác, tìm kiếm nâng cao và tùy chỉnh vuốt.
+
+Bản 0.14 — Công việc và liên hệ:
+- Trung tâm cần xử lý, nhắc trả lời và hồ sơ liên hệ.
+
+Bản 0.15 — AI hỗ trợ:
+- Phân loại, tóm tắt và gợi ý trả lời có kiểm soát quyền riêng tư.
+
+7. NHỮNG ĐIỂM ĐÃ ĐƯỢC ÁP DỤNG TRONG GÓI MÃ HIỆN TẠI
+- Chuyển thanh tiêu đề hộp thư sang nền bề mặt trung tính; dùng xanh thương hiệu cho điểm nhấn thay vì phủ toàn thanh.
+- Thêm thanh điều hướng dưới gồm Hộp thư, Ưu tiên, Đã hoãn và Thiết lập.
+- Giữ nguyên menu bên để truy cập bộ lọc Email, Điện thoại, Chat, Mạng xã hội và từng tài khoản.
+- Giữ các hành vi và màn hình cốt lõi hiện có; không giả lập tab Danh bạ/AI khi chưa có chức năng thực tế.
+- Màu nhận diện #00A479 và hỗ trợ sáng/tối sẵn có được giữ nguyên.
+
+8. GHI CHÚ KIỂM THỬ
+- Gói mã được tạo dựa trên bản PVC-Hub-Ver6-hardened.zip hiện có.
+- Môi trường hiện tại không có Android SDK/Gradle Wrapper phù hợp để chạy build Android, vì vậy chưa thể xác nhận biên dịch hoặc cài đặt thành công.
+- Cần mở dự án trong Android Studio, đồng bộ Gradle và chạy thử trên thiết bị/emulator trước khi phát hành.
+- Đây là đề xuất và bản chỉnh giao diện bước đầu; các mục trong lộ trình chưa được triển khai nếu không được liệt kê rõ ở mục 7.

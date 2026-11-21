@@ -1,19 +1,20 @@
-PVC-Hub — COMPLETE SOURCE PACKAGE
+PVC-Hub — CLEAN SOURCE PACKAGE
 
-This package combines the original Ver6 project source with the security hardening and Premium Minimal UI changes.
+This archive contains the complete Android project at the repository root. It is based on the hardened Premium Minimal source archive and the product requirements document.
 
-Included:
-- Original Android project structure and application source/resources.
-- Premium Minimal inbox UI changes (green identity #00A479; simplified navigation/layout).
-- Security hardening changes and docs/SECURITY-REMEDIATION.md.
-- Updated GitHub Actions workflow and Gradle configuration for safer signing.
+Repairs included:
+- Restored the complete app/build.gradle.kts instead of the truncated file on the broken main branch.
+- Added material-icons-extended for InboxScreen.AccessTime.
+- Included the known-good Android SDK install sequence (platform-tools, platforms;android-35, build-tools;35.0.0).
+- Included the original product requirements and a file-by-file rebuild audit.
 
-Intentionally not included:
-- app/pvc-hub.keystore: the original repository contained a private signing keystore. It is excluded so that a private signing key is not redistributed. Configure a new release keystore using the environment variables documented in app/build.gradle.kts / README.md.
-- PVC-Hub-0.11-full.zip: an embedded older source snapshot; it is not required to build the current project and may contain stale configuration or credentials.
+Security:
+- No keystore, JKS, APK, local.properties, or embedded old source archive is included.
+- Release signing is supplied only by GitHub Actions secrets.
+- The former signing key is considered compromised; do not reuse it.
 
-Build notes:
-- Open this folder (the one containing settings.gradle.kts) in Android Studio.
-- Sync Gradle, then build the app.
-- The source package has not been compiled in this environment; run a clean build and test on a device/emulator before release.
-- Do not commit keystores, passwords, signing credentials, or local.properties.
+Validation boundary:
+The source tree and configuration were statically inspected. Android Gradle build, Kotlin compilation, lint, unit tests, APK assembly and device testing have not yet been executed successfully in this environment. Do not treat this package as a verified release until CI passes.
+
+Build command:
+gradle testDebugUnitTest lintDebug assembleDebug --no-daemon
