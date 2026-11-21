@@ -28,26 +28,36 @@ jobs:
 
       - name: Set up Android SDK
         uses: android-actions/setup-android@v4
-        with:
-          packages: |
-            platform-tools
-            platforms;android-35
-            build-tools;35.0.0
 
-      - name: Set up Gradle
-        uses: gradle/actions/setup-gradle@v4
-        with:
-          gradle-version: "8.10.2"
+      - name: Install Android SDK packages
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          sdkmanager --install \
+            "platform-tools" \
+            "platforms;android-35" \
+            "build-tools;35.0.0"
+
+          sdkmanager --list_installed
 
       - name: Verify Android SDK installation
         shell: bash
         run: |
           set -euo pipefail
+
           echo "ANDROID_HOME=$ANDROID_HOME"
+
           test -d "$ANDROID_HOME/platform-tools"
           test -d "$ANDROID_HOME/platforms/android-35"
           test -d "$ANDROID_HOME/build-tools/35.0.0"
-          sdkmanager --list_installed
+
+          echo "Android SDK installation verified."
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: "8.10.2"
 
       - name: Run checks and build debug
         run: gradle testDebugUnitTest lintDebug assembleDebug --no-daemon
@@ -84,11 +94,19 @@ jobs:
       - name: Set up Android SDK
         if: ${{ env.PVC_RELEASE_KEYSTORE_BASE64 != '' }}
         uses: android-actions/setup-android@v4
-        with:
-          packages: |
-            platform-tools
-            platforms;android-35
-            build-tools;35.0.0
+
+      - name: Install Android SDK packages
+        if: ${{ env.PVC_RELEASE_KEYSTORE_BASE64 != '' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          sdkmanager --install \
+            "platform-tools" \
+            "platforms;android-35" \
+            "build-tools;35.0.0"
+
+          sdkmanager --list_installed
 
       - name: Set up Gradle
         if: ${{ env.PVC_RELEASE_KEYSTORE_BASE64 != '' }}
@@ -101,6 +119,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+
           test -n "$PVC_RELEASE_STORE_PASSWORD"
           test -n "$PVC_RELEASE_KEY_ALIAS"
           test -n "$PVC_RELEASE_KEY_PASSWORD"
