@@ -1,3 +1,4 @@
+
 name: Build and verify PVC-Hub
 
 on:
@@ -60,6 +61,7 @@ jobs:
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     needs: verify
+
     env:
       PVC_RELEASE_KEYSTORE_BASE64: ${{ secrets.PVC_RELEASE_KEYSTORE_BASE64 }}
       PVC_RELEASE_STORE_PASSWORD: ${{ secrets.PVC_RELEASE_STORE_PASSWORD }}
@@ -113,6 +115,7 @@ jobs:
           test -n "$PVC_RELEASE_STORE_PASSWORD"
           test -n "$PVC_RELEASE_KEY_ALIAS"
           test -n "$PVC_RELEASE_KEY_PASSWORD"
+
           mkdir -p "$RUNNER_TEMP/pvc-signing"
           printf '%s' "$PVC_RELEASE_KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/pvc-signing/release.jks"
           test -s "$RUNNER_TEMP/pvc-signing/release.jks"
