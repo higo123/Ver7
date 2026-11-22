@@ -1,4 +1,68 @@
-excludes += setOf(
+plugins {
+    id("com.android.application")
+    id("org.jetbrains.kotlin.android")
+    id("org.jetbrains.kotlin.plugin.compose")
+    id("com.google.devtools.ksp")
+}
+
+// Release signing is supplied only by CI/local environment variables.
+// Never commit a keystore or its passwords to source control.
+val releaseStoreFile = providers.environmentVariable("PVC_RELEASE_STORE_FILE").orNull
+val releaseStorePassword = providers.environmentVariable("PVC_RELEASE_STORE_PASSWORD").orNull
+val releaseKeyAlias = providers.environmentVariable("PVC_RELEASE_KEY_ALIAS").orNull
+val releaseKeyPassword = providers.environmentVariable("PVC_RELEASE_KEY_PASSWORD").orNull
+val hasReleaseSigning = listOf(
+    releaseStoreFile, releaseStorePassword, releaseKeyAlias, releaseKeyPassword
+).all { !it.isNullOrBlank() }
+
+android {
+    namespace = "vn.pvc.hub"
+    compileSdk = 35
+
+    defaultConfig {
+        applicationId = "vn.pvc.hub"
+        minSdk = 28
+        targetSdk = 34
+        versionCode = 18
+        versionName = "0.11.0"
+    }
+
+    if (hasReleaseSigning) {
+        signingConfigs.create("release") {
+            storeFile = file(requireNotNull(releaseStoreFile))
+            storePassword = requireNotNull(releaseStorePassword)
+            keyAlias = requireNotNull(releaseKeyAlias)
+            keyPassword = requireNotNull(releaseKeyPassword)
+        }
+    }
+
+    buildTypes {
+        debug {
+            // Use Android's standard debug key; never use the production key.
+        }
+        release {
+            isMinifyEnabled = false
+            // Without signing secrets Gradle produces an unsigned release APK.
+            // CI must not publish it as an installable release.
+            if (hasReleaseSigning) {
+                signingConfig = signingConfigs.getByName("release")
+            }
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = "17"
+    }
+    buildFeatures {
+        compose = true
+    }
+    packaging {
+        resources {
+            excludes += setOf(
                 "META-INF/LICENSE*",
                 "META-INF/NOTICE*",
                 "META-INF/DEPENDENCIES",
